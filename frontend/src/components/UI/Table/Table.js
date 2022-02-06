@@ -6,13 +6,15 @@ const Table = ({ flights }) => {
 	let rows = flights.map((flight, idx) => {
 		return (
 			<tr key={idx}>
-				<td>{flight.From ? flight.From : "-"}</td>
-				<td>{flight.To ? flight.To : "-"}</td>
-				<td>{flight.Arrival_Time ? flight.Arrival_Time : "-"}</td>
-				<td>{flight.Departure_Time ? flight.Departure_Time : "-"}</td>
-				<td>{flight.Economy_Class ? flight.Economy_Class : "-"}</td>
-				<td>{flight.Premium_Class ? flight.Premium_Class : "-"}</td>
-				<td>{flight.Business_Class ? flight.Business_Class : "-"}</td>
+                <td>{flight.Airlines ? flight.Airlines : "-"}</td>
+				<td>{flight.Source ? flight.Source : "-"}</td>
+				<td>{flight.Destination ? flight.Destination : "-"}</td>
+                <td>{flight.Date ? flight.Date : "-"}</td>
+				<td>{flight.Arrival_time ? flight.Arrival_time : "-"}</td>
+				<td>{flight.Departure_time ? flight.Departure_time : "-"}</td>
+				<td>{flight.CAD ? flight.CAD : "-"}</td>
+                <td>{flight.Stops ? flight.Stops : "-"}</td>
+                <td>{flight.Duration ? flight.Duration : "-"}</td>
 			</tr>
 		);
 	});
@@ -21,13 +23,15 @@ const Table = ({ flights }) => {
 		<table className={classes.Table}>
 			<thead>
 				<tr>
-					<th>From</th>
-					<th>To</th>
-					<th>Departure</th>
-					<th>Arrival</th>
-					<th>Economy</th>
-					<th>Premium</th>
-					<th>Business</th>
+                    <th>Airlines</th>
+					<th>Source</th>
+					<th>Destination</th>
+                    <th>Date</th>
+					<th>Departure Time</th>
+					<th>Arrival Time</th>
+                    <th>Stops</th>
+                    <th>Duration</th>
+					<th>CAD</th>
 				</tr>
 			</thead>
 			<tbody>{rows}</tbody>

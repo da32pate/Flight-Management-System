@@ -80,7 +80,6 @@ def site_open():
     duration =[]
     duration  = driver.find_elements_by_xpath("//ol[@class='flights']//div[@class='section duration allow-multi-modal-icons']//div[@class='top']")
 
-
     no_stop = []
     no_stop  = driver.find_elements_by_xpath("//ol[@class='flights']//div[@class='section stops']//div[@class='top']")
 
@@ -92,9 +91,6 @@ def site_open():
 
     # departure_time = driver.find_elements_by_xpath("//div[@class='itinerary-depart-time depart-time']")
 
-    
-    
-    
     price_list=[]
     stops=[]
     for i in range(len(departure_time)):
@@ -118,7 +114,7 @@ def site_open():
     arrival = len(departure_time)*[str(destination_airport)]
     # a = pd.DataFrame(departure_time,arrival_time,price_list)
     doj1 = len(departure_time)*[doj]
-    df  = pd.DataFrame(doj1,columns=["Date of journey"])
+    df  = pd.DataFrame(doj1,columns=["Date"])
     df["Source"] = departure    
     df["Destination"] = arrival
     df["Departure_time"] = departure_time
@@ -140,9 +136,6 @@ def site_open():
     df.index = df.index +1
     df.pop("index")
     driver.close()
-
-    
-    
 
     return df.to_json(orient='records')
 
