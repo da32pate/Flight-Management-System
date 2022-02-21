@@ -10,11 +10,11 @@ const Table = ({ flights }) => {
 				<td>{flight.Source ? flight.Source : "-"}</td>
 				<td>{flight.Destination ? flight.Destination : "-"}</td>
                 <td>{flight.Date ? flight.Date : "-"}</td>
-				<td>{flight.Arrival_time ? flight.Arrival_time : "-"}</td>
 				<td>{flight.Departure_time ? flight.Departure_time : "-"}</td>
-				<td>{flight.CAD ? flight.CAD : "-"}</td>
+				<td>{flight.Arrival_time ? flight.Arrival_time : "-"}</td>
                 <td>{flight.Stops ? flight.Stops : "-"}</td>
                 <td>{flight.Duration ? flight.Duration : "-"}</td>
+				<td>{flight.CAD ? "$" + flight.CAD : "-"}</td>
 			</tr>
 		);
 	});
@@ -31,7 +31,7 @@ const Table = ({ flights }) => {
 					<th>Arrival Time</th>
                     <th>Stops</th>
                     <th>Duration</th>
-					<th>CAD</th>
+					<th>Price</th>
 				</tr>
 			</thead>
 			<tbody>{rows}</tbody>

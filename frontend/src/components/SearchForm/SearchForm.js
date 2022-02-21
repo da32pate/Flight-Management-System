@@ -3,7 +3,6 @@ import classes from "./SearchForm.module.css";
 
 import Input from "../UI/Input/Input";
 import axiosInstance from "../../axios";
-import Button from "../UI/Button/Button";
 import Spinner from "../UI/Spinner/spinner";
 import Table from "../UI/Table/Table";
 import Moment from "moment";
@@ -60,6 +59,8 @@ const SearchForm = (props) => {
 			},
 		},
 		loading: false,
+		live: false,
+		cached: false,
 	});
 
 	const [data, setData] = useState();
@@ -90,9 +91,7 @@ const SearchForm = (props) => {
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
-	const submitHandler = (event) => {
-		event.preventDefault();
-
+	const getPayload = () => {
 		let payload = {
 			source: state.orderForm.origin.value,
 			destination: state.orderForm.destination.value,
@@ -100,10 +99,34 @@ const SearchForm = (props) => {
 			person: state.orderForm.number.value,
 		};
 
+		return payload;
+	};
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	const searchLive = () => {
+        
+		let payload = getPayload();
+
 		setState({ ...state, loading: true });
 
 		axiosInstance.post("/site_open", payload).then((res) => {
-            console.log(res);
+			setState({ ...state, loading: false });
+			setData(res.data);
+		});
+	};
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	const searchCached = () => {
+        
+		let payload = getPayload();
+
+		setState({ ...state, loading: true });
+
+		axiosInstance.post("/site_open/cached", payload).then((res) => {
 			setState({ ...state, loading: false });
 			setData(res.data);
 		});
@@ -128,7 +151,7 @@ const SearchForm = (props) => {
 
 	// create a form with Input elements using info from the above array
 	let form = (
-		<form onSubmit={submitHandler}>
+		<>
 			{formElementsArray.map((formElement) => {
 				return (
 					<Input
@@ -142,8 +165,7 @@ const SearchForm = (props) => {
 					/>
 				);
 			})}
-			<Button>SEARCH</Button>
-		</form>
+		</>
 	);
 
 	if (state.loading) form = <Spinner />;
@@ -154,6 +176,11 @@ const SearchForm = (props) => {
 				<h4>Flights</h4>
 				{form}
 			</div>
+			<div className={classes.buttons}>
+                <button className={classes.TealButton} onClick={searchCached}>Search Cached</button>
+                <button className={classes.Button} onClick={searchLive}>Search Live</button>
+			</div>
+
 			{table}
 		</>
 	);

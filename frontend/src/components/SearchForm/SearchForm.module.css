@@ -9,6 +9,50 @@
     box-sizing: border-box;
 }
 
+.Button {
+    background-color: transparent;
+	border: 2px solid #0078d7;
+    border-radius: 7px;
+	color: #0078d7;
+	outline: none;
+	cursor: pointer;
+	font: inherit;
+    font-size: large;
+	padding: 7px 14px;
+	margin: 5px 10px 5px 10px;
+	font-weight: bold;
+}
+
+.TealButton {
+    background-color: transparent;
+	border: 2px solid teal;
+    border-radius: 7px;
+	color: teal;
+	outline: none;
+	cursor: pointer;
+	font: inherit;
+    font-size: large;
+	padding: 7px 14px;
+	margin: 5px 10px 5px 10px;
+	font-weight: bold;
+}
+
+.TealButton:hover {
+    color: #00bed7;
+    border: 2px solid #00bed7;
+}
+
+.Button:hover {
+	color: #00bed7;
+    border: 2px solid #00bed7;
+}
+
+.buttons {
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
 @media (min-width: 600px) {
     .SearchForm {
         width: 500px;

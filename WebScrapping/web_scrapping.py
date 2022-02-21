@@ -121,17 +121,17 @@ def site_open():
     df["Arrival_time"] = arrival_time
     df["Duration"] = duration
     df["Stops"] = stops
-    df["CAD $"]= price_list
+    df["CAD"]= price_list
     df["Airlines"] = airlines
 #     df["Stops"]=df["Stops"].astype(str).str.replace("\n","")
-    df["CAD $"]=df["CAD $"].astype(str).str.replace(",","")
-    df["CAD $"] = pd.to_numeric(df['CAD $'])
+    df["CAD"]=df["CAD"].astype(str).str.replace(",","")
+    df["CAD"] = pd.to_numeric(df['CAD'])
 #     df["Stops"]=df["Stops"].astype(str).str.replace("stops","")
 #     df["Stops"]=df["Stops"].astype(str).str.replace("stop","")
     df["Duration"]=df["Duration"].astype(str).str.replace("\n","")
     df = df.drop(df[(df.Stops =='3') | (df.Airlines == 'Multiple Airlines')].index)
     df= df.drop_duplicates()
-    df = df.sort_values(by='CAD $')
+    df = df.sort_values(by='CAD')
     df = df.reset_index()
     df.index = df.index +1
     df.pop("index")
