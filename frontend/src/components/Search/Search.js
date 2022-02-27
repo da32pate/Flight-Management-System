@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import ContactData from "../ContactData/ContactData";
+import SearchForm from "../SearchForm/SearchForm";
 
 const Search = () => {
 	return (
 		<Layout>
-			<ContactData />
+			<SearchForm />
 		</Layout>
 	);
 }

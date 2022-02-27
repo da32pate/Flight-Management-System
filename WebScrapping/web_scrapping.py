@@ -11,19 +11,22 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import flask
 from flask import request
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
+CORS(app, support_credentials=True)
 app.config["DEBUG"] = True
 
 
-@app.route('/site_open', methods=['GET'])
+@app.route('/site_open', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def site_open():
     print(request.data, file=sys.stderr)
     request_data = request.get_json()
     source = request_data['source']
     destination =request_data['destination']
     date = request_data['date']
-    person = request_data['person']
+    person = str(request_data['person'])
     url = "https://www.aircanada.com/ca/en/aco/home/app.html#/search?org1="+source+"&dest1="+destination+"&orgType1=A&destType1=A&departure1="+date+"&marketCode=INT&numberOfAdults="+person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
     economy_list=[]
     economy_desc=[]
