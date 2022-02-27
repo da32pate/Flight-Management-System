@@ -61,7 +61,7 @@ class TestAirCanada(unittest.TestCase):
         self.assertEqual(self.travel2.url_validity(), 'positive response')
         
         
-        def test_response_type(self):
+    def test_response_type(self):
 
         temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
          {
