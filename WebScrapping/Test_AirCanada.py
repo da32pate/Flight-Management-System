@@ -6,6 +6,7 @@ from requests_html import HTMLSession
 import unittest
 from unittest.mock import patch
 import nest_asyncio
+import re
 #source = "YYZ"
 #destination = "DEL"
 #date = "03/07/2022"
@@ -60,7 +61,44 @@ class TestAirCanada(unittest.TestCase):
         self.assertEqual(self.travel2.url_validity(), 'positive response')
         
         
-    
+        def test_response_type(self):
+
+        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+         {
+
+                "source" : "YYZ",
+                "destination" : "DEL",
+                "date" : "03/07/2022",
+                "person": "1"
+         })
+        self.assertGreater( len(temp.json()),0 )
+
+    def test_response_type_wrong(self):
+
+        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+         {
+
+                "source" : "YYZ36",
+                "destination" : "DEL",
+                "date" : "03/07/2022",
+                "person": "1"
+         })
+        
+        self.assertEqual( temp.status_code , 500)
+        
+        
+    def test_response_type_sorted(self):
+
+        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+         {
+
+                "source" : "YYZ",
+                "destination" : "DEL",
+                "date" : "03/07/2022",
+                "person": "1"
+         })
+        
+        self.assertLess( list(map(int, re.findall(r'\d+', temp.json()[0]['Economy_Class'])))[0] ,  list(map(int, re.findall(r'\d+', temp.json()[-1]['Economy_Class'])))[0] )
 if __name__ == '__main__':
     unittest.main() 
 
