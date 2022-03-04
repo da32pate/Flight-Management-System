@@ -15,6 +15,7 @@ import pandas as pd
 # destination = "DEL"
 # date = "03/07/2022"
 
+
 import sys
 
 
@@ -32,6 +33,7 @@ class Travel:
 
     def url_validity(self):
         # url = "https://www.aircanada.com/ca/en/aco/home/app.html#/search?org1="+self.source+"&dest1="+self.destination+"&orgType1=A&destType1=A&departure1="+self.date+"&marketCode=INT&numberOfAdults="+self.person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
+        
         url = "https://www.ca.kayak.com/flights/" + self.source + "-" + self.destination + "/" + self.date.replace("/",
                                                                                                                    "-") + "2022-05-30?sort=bestflight_a"
         nest_asyncio.apply()
