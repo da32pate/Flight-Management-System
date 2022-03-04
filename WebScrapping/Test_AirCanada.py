@@ -18,8 +18,6 @@ import pandas as pd
 import sys
 
 
- 
-
 class Travel:
     def __init__(self, date, source, destination, Departure_time, Arrival_time, Duration, Stops, CAD, Airlines):
         self.date = date
