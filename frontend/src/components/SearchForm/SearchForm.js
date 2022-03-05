@@ -125,7 +125,7 @@ const SearchForm = (props) => {
 
 		setState({ ...state, loading: true });
 
-		axiosInstance.post("/site_open/cached", payload).then((res) => {
+		axiosInstance.post("/site_open/cache", payload).then((res) => {
 			setState({ ...state, loading: false });
 			setData(res.data);
 		});
@@ -168,12 +168,6 @@ const SearchForm = (props) => {
 	);
 
 	if (state.loading) form = <Spinner />;
-
-	useEffect(() => {
-		if (data && data.length > 0) {
-			table = <Table flights={data} />;
-		}
-	}, [data]);
 
 	return (
 		<div className={classes.background}>

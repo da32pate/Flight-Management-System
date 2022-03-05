@@ -145,8 +145,8 @@ def site_open():
 
     cache_data = pd.concat( [cache_data, df])
 
-    cache_data.reset_index(inplace=True)
-    cache_data.to_csv("kayak1_data.csv")
+    #cache_data.reset_index(inplace=True)
+    cache_data.to_csv("kayak1_data.csv", index=False)
     return df.to_json(orient='records')
 
 
@@ -164,11 +164,11 @@ def cache():
     except:
         mode=None
     person = str(request_data['person'])
-    
+
     df = pd.read_csv('kayak1_data.csv')
     df1 = df[(df["Source"] == source_airport) & (df["Destination"]==destination_airport) & (df["Date"] == doj)]
     print(df1)
-    df1.reset_index(inplace=True)
+    #df1.reset_index(inplace=True)
     return df1.to_json(orient='records')
 
 
