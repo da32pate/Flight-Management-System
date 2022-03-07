@@ -6,7 +6,7 @@ import axiosInstance from "../../axios";
 import Spinner from "../UI/Spinner/spinner";
 import Table from "../UI/Table/Table";
 import Moment from "moment";
-import Layout from "../Layout/Layout";
+import Layout from "../Layout/Layout"; 
 
 const AIRPORTS = [
 	{
