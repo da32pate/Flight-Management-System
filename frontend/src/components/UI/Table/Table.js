@@ -5,13 +5,24 @@ const Table = ({ flights }) => {
 	const [state, setState] = useState({
 		priceLow: structuredClone(flights),
 		priceHigh: structuredClone(flights).sort((a, b) => b.CAD - a.CAD),
+		durationLow: structuredClone(flights).sort((a, b) =>
+			a.Duration.localeCompare(b.Duration)
+		),
+		durationHigh: structuredClone(flights).sort((a, b) =>
+			b.Duration.localeCompare(a.Duration)
+		),
 		data: flights,
 	});
 
 	const handleSelect = (event) => {
-		if (event.target.value == "low")
+		if (event.target.value == "priceLow")
 			setState({ ...state, data: state.priceLow });
-		else setState({ ...state, data: state.priceHigh });
+		else if (event.target.value == "priceHigh")
+			setState({ ...state, data: state.priceHigh });
+		else if (event.target.value == "durationLow")
+			setState({ ...state, data: state.durationLow });
+		else if (event.target.value == "durationHigh")
+			setState({ ...state, data: state.durationHigh });
 	};
 
 	let rows = state.data.map((flight, idx) => {
@@ -35,10 +46,11 @@ const Table = ({ flights }) => {
 			<select
 				value={state.value}
 				onChange={handleSelect}
-				className={classes.custom_select}
-            >
-				<option value='low'>low to high</option>
-				<option value='high'>high to low</option>
+				className={classes.custom_select}>
+				<option value='priceLow'>price low to high</option>
+				<option value='priceHigh'>price high to low</option>
+				<option value='durationLow'>duration low to high</option>
+				<option value='durationHigh'>duration high to low</option>
 			</select>
 
 			<table className={classes.Table}>

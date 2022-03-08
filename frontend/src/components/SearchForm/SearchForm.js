@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./SearchForm.module.css";
 
 import Input from "../UI/Input/Input";
@@ -168,6 +168,12 @@ const SearchForm = (props) => {
 	);
 
 	if (state.loading) form = <Spinner />;
+
+	useEffect(() => {
+		if (data && data.length > 0) {
+			table = <Table flights={data} />;
+		}
+	}, [data]);
 
 	return (
 		<div className={classes.background}>
