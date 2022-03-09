@@ -11,15 +11,15 @@ import Layout from "../Layout/Layout";
 const AIRPORTS = [
 	{
 		india: [
-			{ value: "DEL", displayValue: "DEL - Delhi" },
-			{ value: "BOM", displayValue: "BOM - Mumbai" },
-			{ value: "MAA", displayValue: "MAA - Chennai" },
-			{ value: "BLR", displayValue: "BLR - Banglore" },
-			{ value: "COK", displayValue: "COK - Kochi" },
-			{ value: "HYD", displayValue: "HYD - Hyderabad" },
-			{ value: "CCU", displayValue: "CCU - Kolkata" },
 			{ value: "AMD", displayValue: "AMD - Ahmedabad" },
+			{ value: "BLR", displayValue: "BLR - Banglore" },
 			{ value: "IXC", displayValue: "IXC - Chandigarh" },
+			{ value: "MAA", displayValue: "MAA - Chennai" },
+			{ value: "DEL", displayValue: "DEL - Delhi" },
+			{ value: "HYD", displayValue: "HYD - Hyderabad" },
+			{ value: "COK", displayValue: "COK - Kochi" },
+			{ value: "CCU", displayValue: "CCU - Kolkata" },
+			{ value: "BOM", displayValue: "BOM - Mumbai" },
 		],
 		canada: [
 			{ value: "YYC", displayValue: "YYC - Calgary" },
