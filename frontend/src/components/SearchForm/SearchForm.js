@@ -23,12 +23,12 @@ const AIRPORTS = [
 		],
 		canada: [
 			{ value: "YYC", displayValue: "YYC - Calgary" },
+			{ value: "YHZ", displayValue: "YHZ - Nova Scotia" },
+			{ value: "YOW", displayValue: "YOW - Ottawa" },
+			{ value: "YQB", displayValue: "YQB - Quebec" },
 			{ value: "YYZ", displayValue: "YYZ - Toronto" },
 			{ value: "YVR", displayValue: "YVR - Vancover" },
 			{ value: "YWG", displayValue: "YWG - Winnipeg" },
-			{ value: "YQB", displayValue: "YQB - Quebec" },
-			{ value: "YHZ", displayValue: "YHZ - Nova Scotia" },
-			{ value: "YOW", displayValue: "YOW - Ottawa" },
 		],
 	},
 ];
