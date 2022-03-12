@@ -29,6 +29,7 @@ def site_open():
     source_airport = request_data['source']
     destination_airport =request_data['destination']
     doj = request_data['date']
+    mode = request_data['type']
     person = str(request_data['person'])
     url="https://www.ca.kayak.com/flights/" +str(source_airport) +"-" +str(destination_airport)+ "/"+str(doj)+ "?sort=bestflight_a"
 
@@ -38,10 +39,18 @@ def site_open():
     # options.add_argument('--no-sandbox')
     # options.add_argument('--headless')
     # options.add_argument('--disable-gpu')
-    driver = Remote(
-        command_executor='http://selenium__standalone-firefox:4444/wd/hub',
-        desired_capabilities={'browserName': 'firefox'}
-    )
+
+    driver=None
+    if mode=='Test':
+        driver = Remote(
+            command_executor='http://selenium__standalone-firefox:4444/wd/hub',
+            desired_capabilities={'browserName': 'firefox'}
+        )
+    else:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--incognito")
+        driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=chrome_options)
+
     driver.maximize_window()
     driver.get(url)
     time.sleep(25)
