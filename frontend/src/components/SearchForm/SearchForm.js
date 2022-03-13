@@ -11,6 +11,7 @@ import Layout from "../Layout/Layout";
 const AIRPORTS = [
 	{
 		india: [
+            { value: "Source", displayValue: "Source" },
 			{ value: "AMD", displayValue: "AMD - Ahmedabad" },
 			{ value: "BLR", displayValue: "BLR - Banglore" },
 			{ value: "IXC", displayValue: "IXC - Chandigarh" },
@@ -22,6 +23,7 @@ const AIRPORTS = [
 			{ value: "BOM", displayValue: "BOM - Mumbai" },
 		],
 		canada: [
+            { value: "Destination", displayValue: "Destination" },
 			{ value: "YYC", displayValue: "YYC - Calgary" },
 			{ value: "YHZ", displayValue: "YHZ - Nova Scotia" },
 			{ value: "YOW", displayValue: "YOW - Ottawa" },
@@ -41,14 +43,14 @@ const SearchForm = (props) => {
 				elementConfig: {
 					options: AIRPORTS,
 				},
-				value: "DEL",
+				value: "Source",
 			},
 			destination: {
 				elementType: "select",
 				elementConfig: {
 					options: AIRPORTS,
 				},
-				value: "YYZ",
+				value: "Destination",
 			},
 			date: {
 				elementType: "date",
@@ -103,10 +105,25 @@ const SearchForm = (props) => {
 		return payload;
 	};
 
+    /////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+    const validate = () => {
+        let payload = getPayload();
+        if (payload.source == 'Source' || payload.destination == 'Destination') return false;
+        return true;
+    }
+
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 	const searchLive = () => {
+
+        if (!validate()) {
+            alert("select correct source and destination airports");
+            return;
+        }
+
 		let payload = getPayload();
 
 		setState({ ...state, loading: true });
@@ -121,6 +138,12 @@ const SearchForm = (props) => {
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 	const searchCached = () => {
+
+        if (!validate()) {
+            alert("select correct source and destination airports");
+            return;
+        }
+
 		let payload = getPayload();
 
 		setState({ ...state, loading: true });

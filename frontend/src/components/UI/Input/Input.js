@@ -48,6 +48,7 @@ const Input = (props) => {
 				<select
 					className={inputClasses.join(" ")}
 					value={props.value}
+                    isDisabled={props.value == 'Source' || props.value == 'Destination'}
 					onChange={props.changed}>
 					{props.elementConfig.options.map((airports) =>
 						getOptions(airports)
