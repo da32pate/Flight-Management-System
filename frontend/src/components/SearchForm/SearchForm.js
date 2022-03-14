@@ -6,6 +6,7 @@ import axiosInstance from "../../axios";
 import Spinner from "../UI/Spinner/spinner";
 import Table from "../UI/Table/Table";
 import Moment from "moment";
+import Layout from "../Layout/Layout";
 
 const AIRPORTS = [
 	{
@@ -106,7 +107,6 @@ const SearchForm = (props) => {
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 	const searchLive = () => {
-        
 		let payload = getPayload();
 
 		setState({ ...state, loading: true });
@@ -121,7 +121,6 @@ const SearchForm = (props) => {
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 	const searchCached = () => {
-        
 		let payload = getPayload();
 
 		setState({ ...state, loading: true });
@@ -171,18 +170,25 @@ const SearchForm = (props) => {
 	if (state.loading) form = <Spinner />;
 
 	return (
-		<>
-			<div className={classes.SearchForm}>
-				<h4>Flights</h4>
-				{form}
-			</div>
-			<div className={classes.buttons}>
-                <button className={classes.TealButton} onClick={searchCached}>Search Cached</button>
-                <button className={classes.Button} onClick={searchLive}>Search Live</button>
-			</div>
-
-			{table}
-		</>
+		<div className={classes.background}>
+			<Layout>
+				<div className={classes.SearchForm}>
+					<h4c className={classes.title}>Search ✈️</h4c>
+					{form}
+				</div>
+				<div className={classes.buttons}>
+					<button
+						className={classes.TealButton}
+						onClick={searchCached}>
+						cached results
+					</button>
+					<button className={classes.Button} onClick={searchLive}>
+						live results
+					</button>
+				</div>
+				{table}
+			</Layout>
+		</div>
 	);
 };
 
