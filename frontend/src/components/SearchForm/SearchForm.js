@@ -166,6 +166,7 @@ const SearchForm = (props) => {
 		});
 	}
 
+    // get data for the table to be displayed
 	let table = <></>;
 	if (data && data.length > 0) {
 		table = <Table flights={data} />;
