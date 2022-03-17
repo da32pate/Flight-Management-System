@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 import flask
 from flask import request
 from flask_cors import CORS, cross_origin
+import chromedriver_binary
 
 app = flask.Flask(__name__)
 CORS(app, support_credentials=True)
@@ -23,160 +24,100 @@ app.config["DEBUG"] = True
 def site_open():
     print(request.data, file=sys.stderr)
     request_data = request.get_json()
-    source = request_data['source']
-    destination =request_data['destination']
-    date = request_data['date']
+    source_airport = request_data['source']
+    destination_airport =request_data['destination']
+    doj = request_data['date']
     person = str(request_data['person'])
-    url = "https://www.aircanada.com/us/en/aco/home/app.html#/search?org1="+source+"&dest1="+destination+"&orgType1=A&destType1=A&departure1="+date+"&marketCode=INT&numberOfAdults="+person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
-    economy_list=[]
-    economy_desc=[]
-    premium_list=[]
-    premium_desc=[]
-    executive_list=[]
-    executive_desc=[]
-    economy_price=[]
-    premium_price=[]
-    executive_price=[]
-    count = 0
-    final=[]
-    no= 0
-    count1= 0;count2=0;count3=0
-    eco_dis=[]
-    pre_dis=[]
-    exe_dis=[]
-    #opening the site using selenium
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    url="https://www.ca.kayak.com/flights/" +str(source_airport) +"-" +str(destination_airport)+ "/"+str(doj)+ "?sort=bestflight_a"
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(url)
-    time.sleep(15)
-
-
-    #clicking the price button and sorting the value by price
-    price_button = "//div[@id='sortByPrice']"
-    driver.find_element_by_xpath("//div[@id='sortByPrice']").click()
+    time.sleep(25)
+    def click_more():
     
+        for val in range(0,50):
+            try:
+                driver.find_element_by_xpath("//a[@class='moreButton']").click()
+                time.sleep(5)
+                val = val +1
+
+            except:
+                pass
+    click_more()
     
-    #getting the price list
+    # depart-time base-time
+    departure_time=[]
+    departure_time= driver.find_elements_by_xpath("//ol[@class='flights']//span[@class='depart-time base-time']")
 
-    price_list = driver.find_elements_by_xpath("//div[@class='display-on-hover']")
-    for i in range(len(price_list)):
-        price_list[i]=price_list[i].get_attribute('innerHTML')
+    arrival_time=[]
+    arrival_time= driver.find_elements_by_xpath("//ol[@class='flights']//span[@class='arrival-time base-time']")
 
-
-        
-    for values in range(0,100):
-        try:
-            if driver.find_element_by_xpath("//span[@id='recommendation_ECO_"+str(values)+"']"):
-                economy_list.append(values)
-                a= driver.find_element_by_xpath("//span[@id='recommendation_ECO_"+str(values)+"']").get_attribute("innerHTML")
-                economy_desc.append(a)
-                a = price_list[count]
-    #             print("eco values",values)
-    #             print("eco count",count)
-                economy_price.append(a)
-                count = count +1
-
-        except:
-            pass
+    duration =[]
+    duration  = driver.find_elements_by_xpath("//ol[@class='flights']//div[@class='section duration allow-multi-modal-icons']//div[@class='top']")
 
 
+    no_stop = []
+    no_stop  = driver.find_elements_by_xpath("//ol[@class='flights']//div[@class='section stops']//div[@class='top']")
 
+    price =[]
+    price = driver.find_elements_by_xpath("//div[@class = 'booking']")
 
-        try:
-            if driver.find_element_by_xpath("//span[@id='recommendation_PREM_"+str(values)+"']"):
-                premium_list.append(values)
-                b= driver.find_element_by_xpath("//span[@id='recommendation_PREM_"+str(values)+"']").get_attribute("innerHTML")
-                premium_desc.append(b)
-                a = price_list[count]
-    #             print("prem values ",values)
-    #             print("prem count",count)
-                count = count +1
-                premium_price.append(a)
-        except:
-            pass
+    airlines = []
+    airlines = driver.find_elements_by_xpath("//span[@class = 'codeshares-airline-names']")
 
-
-
-        try:
-            if driver.find_element_by_xpath("//span[@id='recommendation_EXEC_"+str(values)+"']"):
-                executive_list.append(values)
-                c= driver.find_element_by_xpath("//span[@id='recommendation_EXEC_"+str(values)+"']").get_attribute("innerHTML")
-                executive_desc.append(c)
-                a = price_list[count]
-    #             print("exe values",values)
-    #             print("exe count",count)
-                count = count +1
-
-                executive_price.append(a)
-        except:
-            pass
-
-
-
-
-
-    final.extend(economy_list)
-    final.extend(premium_list)
-    final.extend(executive_list)
-    final.sort()
-    final =list(set(final))
+    # departure_time = driver.find_elements_by_xpath("//div[@class='itinerary-depart-time depart-time']")
 
     
     
-
-    for val in final:
-        if val in economy_list:
-            eco_dis.append(economy_price[count1])
-            count1 =count1 +1
-        else:
-            eco_dis.append(None)
-
-
-
-
-        if val in premium_list:
-            pre_dis.append(premium_price[count2])
-            count2 =count2 +1
-        else:
-            pre_dis.append(None)
-
-
-
-
-        if val in executive_list:
-            exe_dis.append(executive_price[count3])
-            count3 =count3 +1
-        else:
-            exe_dis.append(None)
-
-
-        no = no+1 
-        
-        
-        
-    departure_time = driver.find_elements_by_xpath("//div[@class='itinerary-depart-time depart-time']")
-    arrival_time = driver.find_elements_by_xpath("//div[@class='itinerary-arrival-time arrival-time']")
+    
+    price_list=[]
+    stops=[]
     for i in range(len(departure_time)):
-        departure_time[i]=departure_time[i].get_attribute('innerHTML')
+        departure_time[i]= departure_time[i].get_attribute('innerHTML')
         arrival_time[i] = arrival_time[i].get_attribute('innerHTML')
+        duration[i] = duration[i].get_attribute('innerHTML')
+        no_stop[i] = no_stop[i].get_attribute('innerHTML')
+        l = re.findall("(direct|1|2|3|4|5)",no_stop[i])[0]
+        stops.append(l)
+        price[i] = price[i].get_attribute('innerHTML')
 
+#         airlines[i] = airlines[i].get_attribute('innerHTML')
+        b = re.findall("nbsp\;((\d\d\d)|(\d.\d\d\d)|(\d\d.\d\d\d))",price[i])[0][0]
+        price_list.append(b)
+    
+    for k in range(len(airlines)):
+        airlines[k] = airlines[k].get_attribute('innerHTML')
+        
+    # Creating data frames
+    departure = len(departure_time)*[str(source_airport)]
+    arrival = len(departure_time)*[str(destination_airport)]
+    # a = pd.DataFrame(departure_time,arrival_time,price_list)
+    doj1 = len(departure_time)*[doj]
+    df  = pd.DataFrame(doj1,columns=["Date of journey"])
+    df["Source"] = departure    
+    df["Destination"] = arrival
+    df["Departure_time"] = departure_time
+    df["Arrival_time"] = arrival_time
+    df["Duration"] = duration
+    df["Stops"] = stops
+    df["CAD $"]= price_list
+    df["Airlines"] = airlines
+#     df["Stops"]=df["Stops"].astype(str).str.replace("\n","")
+    df["CAD $"]=df["CAD $"].astype(str).str.replace(",","")
+    df["CAD $"] = pd.to_numeric(df['CAD $'])
+#     df["Stops"]=df["Stops"].astype(str).str.replace("stops","")
+#     df["Stops"]=df["Stops"].astype(str).str.replace("stop","")
+    df["Duration"]=df["Duration"].astype(str).str.replace("\n","")
+    df = df.drop(df[(df.Stops =='3') | (df.Airlines == 'Multiple Airlines')].index)
+    df= df.drop_duplicates()
+    df = df.sort_values(by='CAD $')
+    df = df.reset_index()
+    df.index = df.index +1
+    df.pop("index")
+    driver.close()
 
-
-    for val in range(len(departure_time)):
-        departure_time[val] = departure_time[val][7:12]
-
-
-    for val in range(len(arrival_time)):
-        arrival_time[val] = arrival_time[val][7:12]
-
-    print(type(arrival_time),type(departure_time),type(pre_dis),len(eco_dis),len(exe_dis))
     
     
-    df = pd.DataFrame(list(zip(arrival_time,departure_time,eco_dis,pre_dis,exe_dis)),columns=  ['Arrival_Time','Departure_Time','Economy_Class','Premium_Class','Business_Class'])
-
-    df["To"]=destination
-    df["From"]=source
-    df  =df[['From','To','Departure_Time','Arrival_Time','Economy_Class','Premium_Class','Business_Class']]
 
     return df.to_json(orient='records')
 
