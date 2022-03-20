@@ -41,7 +41,7 @@ def site_open():
     # options.add_argument('--disable-gpu')
 
     driver=None
-    if mode=='Test':
+    if mode=='cicd':
         driver = Remote(
             command_executor='http://selenium__standalone-firefox:4444/wd/hub',
             desired_capabilities={'browserName': 'firefox'}

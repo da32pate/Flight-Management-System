@@ -13,6 +13,9 @@ import sys
 #date = "03/07/2022"
 #person="1"
 
+import sys
+ 
+
 class Travel:
     def __init__( self , source, destination, date, person):
         self.source = source
@@ -39,7 +42,7 @@ class Travel:
 
 
 class TestAirCanada(unittest.TestCase):
-    
+    mode=""
     def setUp(self):
         print('setUp')
         self.travel1 = Travel("YYZ", "DEL", "03/09/2022", "1")
@@ -71,7 +74,7 @@ class TestAirCanada(unittest.TestCase):
                 "destination" : "DEL",
                 "date" : "2022-05-30",
                 "person": "1",
-                "type": ""
+                "type": self.mode
          })
         self.assertGreater( len(temp.json()),0 )
 
@@ -84,7 +87,7 @@ class TestAirCanada(unittest.TestCase):
                 "destination" : "DEL",
                 "date" : "2022-05-30",
                 "person": "1",
-                "type": ""
+                "type": self.mode
          })
         
         self.assertEqual( temp.status_code , 500)
@@ -103,7 +106,9 @@ class TestAirCanada(unittest.TestCase):
         
     #     self.assertLess( list(map(int, re.findall(r'\d+', temp.json()[0]['Economy_Class'])))[0] ,  list(map(int, re.findall(r'\d+', temp.json()[-1]['Economy_Class'])))[0] )
 if __name__ == '__main__':
-    unittest.main() 
+    if len(sys.argv) > 1:
+        TestAirCanada.mode = sys.argv.pop()
+    unittest.main()
 
         
         
