@@ -1,6 +1,15 @@
+image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
 
 before_script:
-  - python3 -V  # Print out python version for debugging
+  - python3 -V
   - pip3 install virtualenv
   - virtualenv venv
   - source venv/bin/activate
@@ -9,4 +18,6 @@ before_script:
 
 test:
   script:
-      - python3 -m unittest
+      - cd WebScrapping
+      - python3 web_scrapping.py
+      - python3 Test_AirCanada.py
