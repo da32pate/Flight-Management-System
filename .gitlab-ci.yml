@@ -20,4 +20,6 @@ test:
       - pip3 install -U flask-cors
       - cd WebScrapping
       - python3 web_scrapping.py &
+      - sleep 5
       - python3 Test_AirCanada.py
+
