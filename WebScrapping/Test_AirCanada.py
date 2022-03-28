@@ -40,10 +40,10 @@ class TestAirCanada(unittest.TestCase):
     
     def setUp(self):
         print('setUp')
-        self.travel1 = Travel("YYZ", "DEL", "03/07/2022", "1")
+        self.travel1 = Travel("YYZ", "DEL", "03/09/2022", "1")
         self.travel2 = Travel("YYC", "BOM", "02/30/2022", "1")
-        self.travel3 = Travel("AMD", "YWG", "03/07/2022", "1")
-        self.travel4 = Travel("YOW", "BLR", "03/07/2022", "1")        
+        self.travel3 = Travel("AMD", "YWG", "03/09/2022", "1")
+        self.travel4 = Travel("YOW", "BLR", "03/09/2022", "1")        
 
     def tearDown(self):
         print('tearDown\n')
