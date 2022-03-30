@@ -13,9 +13,9 @@ before_script:
 
 test:
   script:
-      - pip3 install -r requirements.txt
-      - pip3 install -U flask-cors
-      - pip3 install chromedriver-binary
+      - pip install -r requirements.txt
+      - pip install -U flask-cors
+      - pip install chromedriver-binary
       - cd WebScrapping
       - python3 web_scrapping.py &
       - sleep 10
