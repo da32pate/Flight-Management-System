@@ -19,7 +19,7 @@ class Travel:
         self.person = person
         
     def url_validity(self):
-        url = "https://www.aircanada.com/ca/en/aco/home/app.html#/search?org1="+self.source+"&dest1="+self.destination+"&orgType1=A&destType1=A&departure1="+self.date+"&marketCode=INT&numberOfAdults="+self.person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
+        url = "https://www.aircanada.com/us/en/aco/home/app.html#/search?org1="+self.source+"&dest1="+self.destination+"&orgType1=A&destType1=A&departure1="+self.date+"&marketCode=INT&numberOfAdults="+self.person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
         nest_asyncio.apply()
         
         session = HTMLSession()
@@ -63,24 +63,24 @@ class TestAirCanada(unittest.TestCase):
         
     def test_response_type(self):
 
-        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+        temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
          {
 
                 "source" : "YYZ",
                 "destination" : "DEL",
-                "date" : "03/07/2022",
+                "date" : "03/09/2022",
                 "person": "1"
          })
         self.assertGreater( len(temp.json()),0 )
 
     def test_response_type_wrong(self):
 
-        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+        temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
          {
 
                 "source" : "YYZ36",
                 "destination" : "DEL",
-                "date" : "03/07/2022",
+                "date" : "03/09/2022",
                 "person": "1"
          })
         
@@ -89,12 +89,12 @@ class TestAirCanada(unittest.TestCase):
         
     def test_response_type_sorted(self):
 
-        temp = requests.get('http://127.0.0.1:5000/site_open' , json = 
+        temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
          {
 
                 "source" : "YYZ",
                 "destination" : "DEL",
-                "date" : "03/07/2022",
+                "date" : "03/09/2022",
                 "person": "1"
          })
         
