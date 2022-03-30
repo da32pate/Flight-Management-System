@@ -27,7 +27,7 @@ def site_open():
     destination =request_data['destination']
     date = request_data['date']
     person = str(request_data['person'])
-    url = "https://www.aircanada.com/ca/en/aco/home/app.html#/search?org1="+source+"&dest1="+destination+"&orgType1=A&destType1=A&departure1="+date+"&marketCode=INT&numberOfAdults="+person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
+    url = "https://www.aircanada.com/us/en/aco/home/app.html#/search?org1="+source+"&dest1="+destination+"&orgType1=A&destType1=A&departure1="+date+"&marketCode=INT&numberOfAdults="+person+"&numberOfYouth=0&numberOfChildren=0&numberOfInfants=0&numberOfInfantsOnSeat=0&tripType=O&isFlexible=false"
     economy_list=[]
     economy_desc=[]
     premium_list=[]
