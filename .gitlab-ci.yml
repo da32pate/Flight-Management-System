@@ -21,7 +21,7 @@ test:
       - pip3 install -U flask-cors
       - cd WebScrapping
       - python3 web_scrapping.py &
-      - sleep 5
+      - sleep 10
       - export DISPLAY=:10
       - python3 Test_AirCanada.py
       - exit(0)
