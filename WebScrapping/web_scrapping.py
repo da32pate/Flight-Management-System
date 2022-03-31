@@ -13,6 +13,7 @@ from selenium.webdriver.common.by import By
 import flask
 from flask import request
 from flask_cors import CORS, cross_origin
+from selenium.webdriver import Remote
 import chromedriver_binary
 import re
 app = flask.Flask(__name__)
@@ -37,8 +38,10 @@ def site_open():
     # options.add_argument('--no-sandbox')
     # options.add_argument('--headless')
     # options.add_argument('--disable-gpu')
-
-    driver = webdriver.Chrome()
+    driver = Remote(
+        command_executor='http://selenium__standalone-firefox:4444/wd/hub',
+        desired_capabilities={'browserName': 'firefox'}
+    )
     driver.maximize_window()
     driver.get(url)
     time.sleep(25)
