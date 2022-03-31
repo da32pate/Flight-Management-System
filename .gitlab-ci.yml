@@ -3,7 +3,7 @@ stages:
 
 test:e2e:
   stage: test
-  image: jaktestowac/python-chromedriver:3.6-xvfb
+  image: jaktestowac/python-chromedriver:3.8-alpine-selenium
 
   before_script:
     - python3 -V
@@ -14,8 +14,6 @@ test:e2e:
     - pip3 install -r requirements.txt
     - pip3 install flask_cors
     - pip3 install chromedriver_binary
-    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    - sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 
   script:
