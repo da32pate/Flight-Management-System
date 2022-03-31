@@ -13,6 +13,8 @@ before_script:
 
 test:
   script:
+      -choco install -y python3
+      -python -m pip install --upgrade pip
       - pip install -r requirements.txt
       - pip install -U flask-cors
       - pip install chromedriver-binary
