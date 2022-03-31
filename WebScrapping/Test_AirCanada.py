@@ -73,32 +73,32 @@ class TestAirCanada(unittest.TestCase):
          })
         self.assertGreater( len(temp.json()),0 )
 
-#     def test_response_type_wrong(self):
+    def test_response_type_wrong(self):
 
-#         temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
-#          {
+        temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
+         {
 
-#                 "source" : "YYZ36",
-#                 "destination" : "DEL",
-#                 "date" : "2022-05-30",
-#                 "person": "1"
-#          })
+                "source" : "YYZ36",
+                "destination" : "DEL",
+                "date" : "2022-05-30",
+                "person": "1"
+         })
         
-#         self.assertEqual( temp.status_code , 500)
+        self.assertEqual( temp.status_code , 500)
         
         
-#     def test_response_type_sorted(self):
+    def test_response_type_sorted(self):
 
-#         temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
-#          {
+        temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
+         {
 
-#                 "source" : "YYZ",
-#                 "destination" : "DEL",
-#                 "date" : "2022-05-30",
-#                 "person": "1"
-#          })
+                "source" : "YYZ",
+                "destination" : "DEL",
+                "date" : "2022-05-30",
+                "person": "1"
+         })
         
-#         self.assertLess( list(map(int, re.findall(r'\d+', temp.json()[0]['Economy_Class'])))[0] ,  list(map(int, re.findall(r'\d+', temp.json()[-1]['Economy_Class'])))[0] )
+        self.assertLess( list(map(int, re.findall(r'\d+', temp.json()[0]['Economy_Class'])))[0] ,  list(map(int, re.findall(r'\d+', temp.json()[-1]['Economy_Class'])))[0] )
 if __name__ == '__main__':
     unittest.main() 
 
