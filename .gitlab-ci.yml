@@ -12,6 +12,7 @@ test:e2e:
     - python3 -m pip install webdriver_manager
     - python3 -m pip install allure-pytest
     - pip3 install -r requirements.txt
+    - pip3 install flask_cors
 
   script:
       - cd WebScrapping
