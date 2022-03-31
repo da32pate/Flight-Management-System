@@ -17,12 +17,7 @@ test selenium:
     - sleep 10
     - export DISPLAY=:10
     - python3 Test_AirCanada.py
-    - exit(0)
 
-  artifacts:
-    when: always
-    paths:
-      - ./selenium.png
 
 
 
