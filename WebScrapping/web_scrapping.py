@@ -29,7 +29,15 @@ def site_open():
     doj = request_data['date']
     person = str(request_data['person'])
     url="https://www.ca.kayak.com/flights/" +str(source_airport) +"-" +str(destination_airport)+ "/"+str(doj)+ "?sort=bestflight_a"
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    options = Options()
+    options.page_load_strategy = 'normal'
+    options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(25)
