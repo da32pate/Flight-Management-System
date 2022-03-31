@@ -13,7 +13,7 @@ cache:
 test:
   script:
       - Start-Process powershell -Verb runas
-      - ECHO Y | Set-ExecutionPolicy Bypass -Scope Process -Force;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+      -  Set-ExecutionPolicy Bypass -Scope Process -Force;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
       - choco install -y python3
       - python -m pip install --upgrade pip
       - pip install -r requirements.txt
