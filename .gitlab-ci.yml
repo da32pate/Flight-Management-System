@@ -8,21 +8,24 @@ cache:
     - .cache/pip
     - venv/
 
+before_script:
+  - python3 -V
+  - sudo su
+  - sudo apt-get -y update
+  - sudo apt-get -y install python3-pip
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
 
+  
 
 test:
   script:
-      - Start-Process powershell -Verb runas
-      - Remove-Item C:\ProgramData\chocolatey -Recurse
-      -  Set-ExecutionPolicy Bypass -Scope Process -Force;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-      - choco install -y python3
-      - python -m pip install --upgrade pip
-      - pip install -r requirements.txt
-      - pip install -U flask-cors
-      - pip install chromedriver-binary
+      - pip3 install -r requirements.txt
+      - pip3 install -U flask-cors
+      - pip3 install chromedriver-binary
       - cd WebScrapping
-      - START /B python3 web_scrapping.py 
-      - timeout 10
+      - python3 web_scrapping.py &
+      - sleep 10
       - export DISPLAY=:10
       - python3 Test_AirCanada.py
       - exit(0)
