@@ -13,7 +13,7 @@ from selenium.webdriver.common.by import By
 import flask
 from flask import request
 from flask_cors import CORS, cross_origin
-import chromedriver_binary
+##import chromedriver_binary
 import re
 app = flask.Flask(__name__)
 CORS(app, support_credentials=True)
@@ -31,14 +31,14 @@ def site_open():
     person = str(request_data['person'])
     url="https://www.ca.kayak.com/flights/" +str(source_airport) +"-" +str(destination_airport)+ "/"+str(doj)+ "?sort=bestflight_a"
 
-#     options = Options()
-#     options.page_load_strategy = 'normal'
-#     options = webdriver.ChromeOptions()
-#     options.add_argument('--no-sandbox')
-#     options.add_argument('--headless')
-#     options.add_argument('--disable-gpu')
+    options = Options()
+    options.page_load_strategy = 'normal'
+    options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(25)
