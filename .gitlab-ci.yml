@@ -1,11 +1,9 @@
-stages:
-  - test
-
-test:e2e:
+test selenium:
   stage: test
-  image: jaktestowac/python-chromedriver:3.6-xvfb
-
-  before_script:
+  services:
+    - selenium/standalone-firefox
+  image: python:3.9-slim
+  script:
     - python3 -V
     - python3 -m pip install pytest
     - python3 -m pip install selenium
@@ -14,13 +12,17 @@ test:e2e:
     - pip3 install -r requirements.txt
     - pip3 install flask_cors
     - pip3 install chromedriver_binary
+    - cd WebScrapping
+    - python3 web_scrapping.py &
+    - sleep 10
+    - export DISPLAY=:10
+    - python3 Test_AirCanada.py
+    - exit(0)
+
+  artifacts:
+    when: always
+    paths:
+      - ./selenium.png
 
 
-  script:
-      - cd WebScrapping
-      - python3 web_scrapping.py &
-      - sleep 10
-      - export DISPLAY=:10
-      - python3 Test_AirCanada.py
-      - exit(0)
 
