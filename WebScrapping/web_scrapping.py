@@ -8,6 +8,7 @@ import time
 import sys
 from selenium.webdriver.chrome.service import service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import flask
 from flask import request
