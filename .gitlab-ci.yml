@@ -1,28 +1,20 @@
-image: python:3.7
+image: ruby:2.3
+
+services:
+- selenium/standalone-chrome:latest
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  selenium_remote_url: "http://selenium__standalone-chrome:4444/wd/hub/"
 
 cache:
   paths:
-    - .cache/pip
-    - venv/
+  - "./cache/ruby"
 
 before_script:
-  - python3 -V
-  - sudo su
-  - sudo apt-get -y update
-  - sudo apt-get -y install python3-pip
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-  
+- bundle install --path ./cache
 
 test:
   script:
-      - pip3 install -r requirements.txt
-      - pip3 install -U flask-cors
-      - pip3 install chromedriver-binary
       - cd WebScrapping
       - python3 web_scrapping.py &
       - sleep 10
