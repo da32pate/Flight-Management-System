@@ -1,19 +1,18 @@
-image: ruby:2.3
+stages:
+  - test
 
-services:
-- selenium/standalone-chrome:latest
+test:e2e:
+  stage: test
+  image: jaktestowac/python-chromedriver:3.6-xvfb
 
-variables:
-  selenium_remote_url: "http://selenium__standalone-chrome:4444/wd/hub/"
+  before_script:
+    - python3 -V
+    - python3 -m pip install pytest
+    - python3 -m pip install selenium pytest
+    - python3 -m pip install webdriver_manager
+    - python3 -m pip install allure-pytest
+    - pip3 install -r requirements.txt
 
-cache:
-  paths:
-  - "./cache/ruby"
-
-before_script:
-- bundle install --path ./cache
-
-test:
   script:
       - cd WebScrapping
       - python3 web_scrapping.py &
@@ -21,3 +20,4 @@ test:
       - export DISPLAY=:10
       - python3 Test_AirCanada.py
       - exit(0)
+
