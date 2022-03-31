@@ -3,12 +3,12 @@ stages:
 
 test:e2e:
   stage: test
-  image: jaktestowac/python-chromedriver:3.8-alpine-selenium
+  image: jaktestowac/python-chromedriver:3.6-xvfb
 
   before_script:
     - python3 -V
     - python3 -m pip install pytest
-    - python3 -m pip install selenium pytest
+    - python3 -m pip install selenium
     - python3 -m pip install webdriver_manager
     - python3 -m pip install allure-pytest
     - pip3 install -r requirements.txt
