@@ -8,18 +8,17 @@ cache:
     - .cache/pip
     - venv/
 
-before_script:
 
 
 test:
   script:
-      -choco install -y python3
-      -python -m pip install --upgrade pip
+      - choco install -y python3
+      - python -m pip install --upgrade pip
       - pip install -r requirements.txt
       - pip install -U flask-cors
       - pip install chromedriver-binary
       - cd WebScrapping
-      - python3 web_scrapping.py &
+      - START /B python3 web_scrapping.py 
       - timeout 10
       - export DISPLAY=:10
       - python3 Test_AirCanada.py
