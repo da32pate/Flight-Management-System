@@ -12,10 +12,12 @@ from unittest.mock import patch
 import nest_asyncio
 import random
 import re
+import sys
 #source = "YYZ"
 #destination = "DEL"
 #date = "03/07/2022"
 #person="1"
+
 class Travel:
     def __init__( self , source, destination, date, person):
         self.source = source
@@ -67,14 +69,14 @@ class TestAirCanada(unittest.TestCase):
         
         
     def test_response_type(self):
-
         temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
          {
 
                 "source" : "YYZ",
                 "destination" : "DEL",
                 "date" : "2022-05-30",
-                "person": "1"
+                "person": "1",
+                "type": ""
          })
         self.assertGreater( len(temp.json()),0 )
 
@@ -86,7 +88,8 @@ class TestAirCanada(unittest.TestCase):
                 "source" : "YYZ36",
                 "destination" : "DEL",
                 "date" : "2022-05-30",
-                "person": "1"
+                "person": "1",
+                "type": ""
          })
         
         self.assertEqual( temp.status_code , 500)
