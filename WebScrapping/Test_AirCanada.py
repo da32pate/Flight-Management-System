@@ -160,12 +160,7 @@ class Travel:
 
 
 class TestAirCanada(unittest.TestCase):
-<<<<<<< HEAD
     mode = ""
-
-=======
-    mode=""
->>>>>>> b1e262c64172a36bf1ba46c1be90fcf969f9f31c
     def setUp(self):
         print('setUp')
         self.travel1 = Travel("22-03-2022", "DEL", "YYZ", "9:50 p.m.", "3:40 p.m.", "27h 20m", "2", "917",
@@ -239,7 +234,6 @@ class TestAirCanada(unittest.TestCase):
         temp = requests.post('http://127.0.0.1:5000/site_open', json=
         {
 
-<<<<<<< HEAD
             "source": "YYZ",
             "destination": "DEL",
             "date": "2022-05-30",
@@ -247,7 +241,6 @@ class TestAirCanada(unittest.TestCase):
             "type": self.mode
         })
         self.assertGreater(len(temp.json()), 0)
-=======
                 "source" : "YYZ",
                 "destination" : "DEL",
                 "date" : "2022-05-30",
@@ -255,7 +248,6 @@ class TestAirCanada(unittest.TestCase):
                 "type": self.mode
          })
         self.assertGreater( len(temp.json()),0 )
->>>>>>> b1e262c64172a36bf1ba46c1be90fcf969f9f31c
 
     def test_response_type_wrong(self):
         temp = requests.post('http://127.0.0.1:5000/site_open', json=
@@ -270,8 +262,6 @@ class TestAirCanada(unittest.TestCase):
 
         self.assertEqual(temp.status_code, 500)
 
-<<<<<<< HEAD
-=======
         temp = requests.post('http://127.0.0.1:5000/site_open' , json = 
          {
 
@@ -284,8 +274,7 @@ class TestAirCanada(unittest.TestCase):
         
         self.assertEqual( temp.status_code , 500)
         
-        
->>>>>>> b1e262c64172a36bf1ba46c1be90fcf969f9f31c
+
     # def test_response_type_sorted(self):
 
     #     temp = requests.post('http://127.0.0.1:5000/site_open' , json =
@@ -304,9 +293,5 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         TestAirCanada.mode = sys.argv.pop()
     unittest.main()
-<<<<<<< HEAD
 
-
-=======
->>>>>>> b1e262c64172a36bf1ba46c1be90fcf969f9f31c
 
