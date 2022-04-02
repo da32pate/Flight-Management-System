@@ -260,7 +260,6 @@ class TestAirCanada(unittest.TestCase):
 
     #     temp = requests.post('http://127.0.0.1:5000/site_open' , json =
     #      {
-
     #             "source" : "YYZ",
     #             "destination" : "DEL",
     #             "date" : "2022-05-30",

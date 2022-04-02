@@ -6,3 +6,8 @@ numpy
 webdriver_manager
 flask
 flask_cors
+beautifulsoup4
+Flask
+nest_asyncio
+requests
+requests_html

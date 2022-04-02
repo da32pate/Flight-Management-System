@@ -29,7 +29,11 @@ def site_open():
     source_airport = request_data['source']
     destination_airport =request_data['destination']
     doj = request_data['date']
-    mode = request_data['type']
+    mode=None
+    try:
+        mode = request_data['type']
+    except:
+        mode=None
     person = str(request_data['person'])
     url="https://www.ca.kayak.com/flights/" +str(source_airport) +"-" +str(destination_airport)+ "/"+str(doj)+ "?sort=bestflight_a"
 

@@ -96,9 +96,7 @@ const SearchForm = (props) => {
 		let payload = {
 			source: state.orderForm.origin.value,
 			destination: state.orderForm.destination.value,
-			date: Moment(state.orderForm.date.value)
-				.format("DD-MM-YYYY")
-				.replaceAll("-", "/"),
+			date: Moment(state.orderForm.date.value).format("YYYY-MM-DD"),
 			person: state.orderForm.number.value,
 		};
 
