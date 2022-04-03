@@ -150,6 +150,27 @@ def site_open():
     return df.to_json(orient='records')
 
 
+@app.route('/site_open/cache', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def site_open():
+    print(request.data, file=sys.stderr)
+    request_data = request.get_json()
+    source_airport = request_data['source']
+    destination_airport =request_data['destination']
+    doj = request_data['date']
+    mode=None
+    try:
+        mode = request_data['type']
+    except:
+        mode=None
+    person = str(request_data['person'])
+    
+    df = pd.read_csv('kayak1_data.csv')
+    df1 = df[(df["Source"] == source_airport) & (df["Destination"]==destination_airport) & (df["Date"] == doj)]
+    df1.reset_index(inplace=True)
+    return df1.to_json(orient='records')
+
+
 app.run()
 
 
