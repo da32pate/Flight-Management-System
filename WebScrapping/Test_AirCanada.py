@@ -15,7 +15,6 @@ import pandas as pd
 # destination = "DEL"
 # date = "03/07/2022"
 
-
 import sys
 
 
