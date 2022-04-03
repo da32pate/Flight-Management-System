@@ -1,4 +1,5 @@
 # importing the lib
+from functools import cached_property
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
@@ -57,10 +58,10 @@ def site_open():
 
     driver.maximize_window()
     driver.get(url)
-    time.sleep(25)
+    time.sleep(20)
     def click_more():
     
-        for val in range(0,50):
+        for val in range(0,7):
             try:
                 driver.find_element_by_xpath("//a[@class='moreButton']").click()
                 time.sleep(5)
@@ -137,6 +138,15 @@ def site_open():
     df.pop("index")
     driver.close()
 
+
+    cache_data = pd.read_csv("kayak1_data.csv")
+
+    cache_data.drop( cache_data.index[ (cache_data['Date'] == doj) & (cache_data['Source']==source_airport) & (cache_data['Destination']== destination_airport) ], inplace=True)
+
+    cache_data = pd.concat( [cache_data, df])
+
+    cache_data.reset_index(inplace=True)
+    cache_data.to_csv("kayak1_data.csv")
     return df.to_json(orient='records')
 
 
