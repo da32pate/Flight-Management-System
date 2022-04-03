@@ -29,14 +29,14 @@ class Layout extends Component {
 
 	render() {
 		return (
-			<>
+			<div className={classes.box}>
 				<Toolbar toggler={this.sideDrawerToggler} />
 				<SideDrawer
 					drawerStatus={this.state.showSideDrawer}
 					closed={this.sideDrawerCloser}
 				/>
 				<main className={classes.Content}>{this.props.children}</main>
-			</>
+			</div>
 		);
 	}
 }

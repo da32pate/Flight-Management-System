@@ -25,7 +25,7 @@ let getOptions = (airports) => {
 		</>
 	);
 
-    return res;
+	return res;
 };
 
 const Input = (props) => {
