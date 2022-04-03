@@ -14,7 +14,7 @@ import pandas as pd
 # source = "YYZ"
 # destination = "DEL"
 # date = "03/07/2022"
-# person="1"
+
 
 import sys
 
