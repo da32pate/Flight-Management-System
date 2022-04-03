@@ -152,7 +152,7 @@ def site_open():
 
 @app.route('/site_open/cache', methods=['POST'])
 @cross_origin(supports_credentials=True)
-def site_open():
+def cache():
     print(request.data, file=sys.stderr)
     request_data = request.get_json()
     source_airport = request_data['source']
@@ -167,6 +167,7 @@ def site_open():
     
     df = pd.read_csv('kayak1_data.csv')
     df1 = df[(df["Source"] == source_airport) & (df["Destination"]==destination_airport) & (df["Date"] == doj)]
+    print(df1)
     df1.reset_index(inplace=True)
     return df1.to_json(orient='records')
 
