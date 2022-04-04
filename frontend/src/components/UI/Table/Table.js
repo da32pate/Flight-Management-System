@@ -52,7 +52,7 @@ const Table = ({ flights }) => {
 				<option value='durationLow'>duration low to high</option>
 				<option value='durationHigh'>duration high to low</option>
 			</select>
-
+ 
 			<table className={classes.Table}>
 				<thead>
 					<tr>
