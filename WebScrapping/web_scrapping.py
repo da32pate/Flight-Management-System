@@ -61,7 +61,7 @@ def site_open():
     time.sleep(20)
     def click_more():
     
-        for val in range(0,7):
+        for val in range(0,1):
             try:
                 driver.find_element_by_xpath("//a[@class='moreButton']").click()
                 time.sleep(5)
